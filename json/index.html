@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <title>Json Example</title>
+</head>
+
+<body>
+
+    <h1 id="h1">This is Head 1</h1>
+    <h1>This is Head 1</h1>
+    <h1 onclick="test()">This is Head 1</h1>
+
+    <input type="text" name="name" id="name"/>
+    
+    <input type="button" name="btn" value="Click" onclick="ajax()" />
+    <input type="button" name="btn" value="Test" onclick="alert()" />
+    <script>
+        //name = "alamin";
+        //var name = "xyz";
+        let name = "xyz";
+        let student = ['1', 'abc', 4];
+
+        //console.log("test...");
+        //document.write('<h1>This is test line from JS...</h1>');
+        //alert('test JS...');
+        function test(){
+            document.getElementsByTagName('h1')[0].innerHTML = "test";
+        }
+
+        function f1(){
+
+           let name = document.getElementById('name').value;
+           document.getElementsByTagName('h1')[0].innerHTML = name;
+        }
+
+
+        function ajax(){
+            let name = document.getElementById('name').value;
+            let xhttp  = new XMLHttpRequest();
+            // xhttp.open('GET', 'nameCheck.php?name='+name, true);
+            // xhttp.send();
+            // xhttp.onreadystatechange = function (){
+            //     if(this.readyState == 4 && this.status == 200){
+            //         document.getElementById('h1').innerHTML = this.responseText;
+            //     }
+            // }
+            let user = {'id': '23', 'name': name};
+            let data = JSON.stringify(user);
+
+            xhttp.open('POST', 'nameCheck.php', true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send('json='+data);
+            xhttp.onreadystatechange = function (){
+                if(this.readyState == 4 && this.status == 200){
+                    //let user = JSON.parse(this.responseText);
+                    document.getElementById('h1').innerHTML = this.responseText;
+                }
+            }
+        }
+        
+        //head_1.innerHTML = "Test";
+    </script>
+</body>
+</html>
